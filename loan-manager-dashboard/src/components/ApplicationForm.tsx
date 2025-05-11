@@ -11,8 +11,7 @@ const ApplicationForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const backendAPI = process.env.REACT_APP_API_URL + '/applications/submit'; // This line
-      await axios.post(backendAPI, {
+      await axios.post('https://loan-manager-community.onrender.com/api/applications/submit', {
         ...formData,
         loanAmount: Number(formData.loanAmount),
       });
