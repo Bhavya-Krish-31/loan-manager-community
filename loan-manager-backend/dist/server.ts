@@ -15,11 +15,12 @@ mongoose.connect(mongoURI)
   .catch((err) => console.error('Database connection failed:', err));
 
 app.use('/api/applications', applicationRoutes);
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
 app.get('/', (req, res) => {
   res.send('Server is running');
 });
-

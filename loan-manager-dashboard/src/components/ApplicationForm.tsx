@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-import './ApplicationForm.css';
-
 
 const ApplicationForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', phoneNumber: '', loanAmount: '' });
@@ -12,11 +10,16 @@ const ApplicationForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/api/applications/submit', {
-      ...formData,
-      loanAmount: Number(formData.loanAmount)
-    });
-    setFormData({ name: '', email: '', phoneNumber: '', loanAmount: '' });
+    try {
+      const backendAPI = process.env.REACT_APP_API_URL + '/applications/submit'; // This line
+      await axios.post(backendAPI, {
+        ...formData,
+        loanAmount: Number(formData.loanAmount),
+      });
+      setFormData({ name: '', email: '', phoneNumber: '', loanAmount: '' });
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+    }
   };
 
   return (

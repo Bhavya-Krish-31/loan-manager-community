@@ -5,8 +5,9 @@ const Dashboard = () => {
   const [stats, setStats] = useState({ totalApplications: 0, averageLoanAmount: 0 });
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/applications/statistics')
-      .then(res => setStats(res.data));
+    axios.get('https://loan-manager-community.onrender.com/api/applications/statistics')
+      .then(res => setStats(res.data))
+      .catch(error => console.error('Error fetching statistics:', error));
   }, []);
 
   return (
