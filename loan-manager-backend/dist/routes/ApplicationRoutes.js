@@ -12,15 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// routes/ApplicationRoutes.ts
 const express_1 = __importDefault(require("express"));
 const Application_1 = __importDefault(require("../models/Application"));
 const router = express_1.default.Router();
-// POST request to submit application data
 router.post('/submit', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { fullName, loanTenure, loanReason, loanAmount, employmentStatus, employmentAddress } = req.body;
-        // Create a new application document
+
         const application = new Application_1.default({
             fullName,
             loanTenure,
@@ -29,7 +27,6 @@ router.post('/submit', (req, res) => __awaiter(void 0, void 0, void 0, function*
             employmentStatus,
             employmentAddress,
         });
-        // Save the application to the database
         yield application.save();
         res.status(201).json({ message: 'Application submitted successfully!' });
     }
